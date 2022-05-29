@@ -14,6 +14,18 @@ const subjectSchema = new Schema({
     ],
     role: { type: String, default: 'Aluno' },
     semester: { type: Number, default: 1 },
+    messages: {
+        type: Number,
+        default: 0,
+    },
+    points: {
+        type: Number,
+        default: 0,
+    },
+    ativities: {
+        type: Number,
+        default: 0,
+    },
 });
 
 module.exports = model('User', subjectSchema);

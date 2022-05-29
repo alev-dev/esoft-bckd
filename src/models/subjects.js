@@ -26,6 +26,7 @@ const subjectSchema = new Schema({
                     correct: Boolean,
                 },
             ],
+            points: { type: Number, default: 10 },
         },
     ],
     videos: [

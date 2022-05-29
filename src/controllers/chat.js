@@ -34,7 +34,8 @@ const chatController = {
             });
     },
     newMessage: async (req, res) => {
-        const { message, userId } = req.body;
+        const { userId } = req.params;
+        const { message } = req.body;
         await chat
             .findOne({ user: userId })
             .then((chatData) => {
@@ -43,10 +44,21 @@ const chatController = {
                     chatData.save();
                     res.json(chatData);
                 } else {
-                    chat.create(req.body).then((response) => {
+                    chat.create({ ...req.body, user: userId }).then((response) => {
                         res.json(response);
                     });
                 }
+            })
+            .catch((err) => {
+                res.json(err);
+            });
+    },
+
+    deleteChat: async (req, res) => {
+        await chat
+            .findByIdAndDelete(req.params.id)
+            .then((chat) => {
+                res.json(chat);
             })
             .catch((err) => {
                 res.json(err);
