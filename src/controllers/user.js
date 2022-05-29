@@ -67,6 +67,39 @@ const userController = {
                 res.json(err);
             });
     },
+
+    getStudents: async (req, res) => {
+        await userModel
+            .find({ role: 'Aluno' })
+            .then((users) => {
+                res.json(users);
+            })
+            .catch((err) => {
+                res.json(err);
+            });
+    },
+
+    getTeachers: async (req, res) => {
+        await userModel
+            .find({ role: 'Professor' })
+            .then((users) => {
+                res.json(users);
+            })
+            .catch((err) => {
+                res.json(err);
+            });
+    },
+
+    createTeacher: async (req, res) => {
+        await userModel
+            .create({ ...req.body, role: 'Professor' })
+            .then((user) => {
+                res.json(user);
+            })
+            .catch((err) => {
+                res.json(err);
+            });
+    },
 };
 
 module.exports = userController;

@@ -64,6 +64,114 @@ const subjectController = {
                 res.json(err);
             });
     },
+
+    createVideo: async (req, res) => {
+        const { subjectId } = req.params;
+        await subjectModel
+            .findById(subjectId)
+            .then((subject) => {
+                subject.videos.push(req.body);
+                subject.save();
+                res.json(subject);
+            })
+            .catch((err) => {
+                res.json(err);
+            });
+    },
+
+    deleteVideo: async (req, res) => {
+        const { subjectId, id } = req.params;
+        await subjectModel
+            .findById(subjectId)
+            .then((subject) => {
+                subject.videos.id(id).remove();
+                subject.save();
+                res.json(subject);
+            })
+            .catch((err) => {
+                res.json(err);
+            });
+    },
+
+    createAtivities: async (req, res) => {
+        const { subjectId } = req.params;
+        await subjectModel
+            .findByIdAndUpdate(subjectId, { $push: { ativities: req.body } })
+            .then((subject) => {
+                res.json(subject);
+            })
+            .catch((err) => {
+                res.json(err);
+            });
+    },
+
+    deleteAtivities: async (req, res) => {
+        const { subjectId, id } = req.params;
+        await subjectModel
+            .findById(subjectId)
+            .then((subject) => {
+                subject.activities.id(id).remove();
+                subject.save();
+                res.json(subject);
+            })
+            .catch((err) => {
+                res.json(err);
+            });
+    },
+
+    getAtivitieById: async (req, res) => {
+        const { subjectId, id } = req.params;
+        await subjectModel
+            .findById(subjectId)
+            .then((subject) => {
+                const activity = subject.activities.id(id);
+                res.json(activity);
+            })
+            .catch((err) => {
+                res.json(err);
+            });
+    },
+
+    createContent: async (req, res) => {
+        const { subjectId } = req.params;
+        await subjectModel
+            .findById(subjectId)
+            .then((subject) => {
+                subject.content.push(req.body);
+                subject.save();
+                res.json(subject);
+            })
+            .catch((err) => {
+                res.json(err);
+            });
+    },
+
+    deleteContent: async (req, res) => {
+        const { subjectId, id } = req.params;
+        await subjectModel
+            .findById(subjectId)
+            .then((subject) => {
+                subject.content.id(id).remove();
+                subject.save();
+                res.json(subject);
+            })
+            .catch((err) => {
+                res.json(err);
+            });
+    },
+
+    getContentById: async (req, res) => {
+        const { subjectId, id } = req.params;
+        await subjectModel
+            .findById(subjectId)
+            .then((subject) => {
+                const content = subject.content.id(id);
+                res.json(content);
+            })
+            .catch((err) => {
+                res.json(err);
+            });
+    },
 };
 
 module.exports = subjectController;

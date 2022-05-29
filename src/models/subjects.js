@@ -19,10 +19,13 @@ const subjectSchema = new Schema({
     ],
     ativities: [
         {
-            title: String,
-            description: String,
-            date: { type: Date, default: Date.now },
-            hidden: { type: Boolean, default: false },
+            question: String,
+            answers: [
+                {
+                    answer: String,
+                    correct: Boolean,
+                },
+            ],
         },
     ],
     videos: [

@@ -6,6 +6,12 @@ const subjectSchema = new Schema({
     email: String,
     password: String,
     image: String,
+    subejcts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Subject',
+        },
+    ],
     role: { type: String, default: 'Aluno' },
     semester: { type: Number, default: 1 },
 });
